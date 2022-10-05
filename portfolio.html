@@ -30,18 +30,22 @@
 <meta name="theme-color" content="#ffffff">
 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/jeetfund/jeetfundproxy@main/css/_menu.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/css/_portfolio3.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/css/_portfolio4.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/css/_rbw2.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/css/_atm_actioncards.css">
+<link rel="stylesheet" type="text/css" href="css/_sharelease2.css"><!-- share lease shares styles for hypecards -->
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/css/_atm_playRRcard.css"><!-- playing card was just too big -->
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/css/_rrgame.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/css/sweetalert/sweetalert.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/css/sweetalert/sweetalert2.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/js/_walletstatus2.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/js/_portfolio4.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/js/_hypecards2.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/js/_revolver_game3.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/js/_walletstatus3.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/js/_portfolio5.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/js/_hypecards3.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/js/_rbw2.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/js/_sharelease2.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/js/_revolver_game4.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/braavos-wd/braavos-proxy@main/js/_inclHTMLincluder.js"></script>
 <script type="application/javascript" src="https://cdn.jsdelivr.net/gh/jeetfund/jeetfundproxy@main/js/sweetalert/sweetalert.min.js"></script>
 <script>
@@ -213,9 +217,26 @@ document.addEventListener('DOMContentLoaded',function(event){
 				</div>
 			</br>
 			<h4>...</h4>
+			<div class="tokenswaps">
+				<div class="port_beneficiary_hold">
+					<div class="port_beneCard">
+						<div class="mpcard_details"><span class="_beneT">my Beneficiary:</span><span class="_beneD _respValue" id="pbCard_bene">---</span></div>
+						<div class="mpcard_details"><span class="_beneT">Payouts Total:</span><span class="_beneD _respValue" id="pbCard_total">---</span></div>
+						<div class="mpcard_details mpcd_last markred"><span class="_beneT">Payouts Value:</span><span class="_beneD _respValue" id="pbCard_value">---</span></div>
+					</div>
+				</div>
+			</div>
                 <h4>Reward Claims</h4>
 				<div class="myclaimsHold">
 					<div class="myclaimscard_normal">
+						<div class="dropdown">
+							<span id="claimfrom" class="claimfrom multisrc_claim">from Wallet</span>
+							<div class="dropdown-content">
+								<p id="cs_1" class="drop_sel">Wallet Tokens</p>
+								<p id="cs_2" class="drop_sel">Share Lease</p>
+								<p id="cs_3" class="drop_sel">Staked Tokens</p>
+							</div>
+						</div>
 						<div class="claimscard_summary">
 							<div class="mccard_details"><span class="mccardH">Token Balance:</span><span class="mccardD" id="sect_claims_w">---</span></div>
 							<div class="mccard_details"><span class="mccardH">Claims Value:</span><span class="mccardD" id="sect_claimed_w">---</span></div>
@@ -248,25 +269,133 @@ document.addEventListener('DOMContentLoaded',function(event){
 				</div><!-- Holder - claim cards -->
 				
             </div>
-         </section>
+			<div class="actionablePort"><!-- state changing calls: sharelease, stake, vote, bornfire -->
+				<span class="actionPortLabel">State Changing</span>
+				<!-- SHARE LEASE -LEASED -->
+				<div class="actionCard">
+					<div class="actCardTop">
+						<div class="actCardTop_title">Lease Issued <img src="img/info.png" title="rent out your tokens, and have the lessee pay you all your future rewards for that period, today." /><div id="dot_lsrD" class="dot blockel"></div></div><div id="shlc_exp" class="actCardTop_expand"></div><!-- expander button -->
+						<div class="actCardTopData"><!-- card infor -->
+						<!-- LESSOR VIEW -->
+							<div class="inforview">
+								<div class="mpcard_details"><span class="_lsrT">Taker:</span><span class=" _lsrTData _respValue" id="_lsrD_taker">---</span></div>
+								<div class="mpcard_details"><span class="_lsrT">Tokens:</span><span class="_lsrTData _respValue" id="_lsrD_tokens">---</span></div>
+								<div class="mpcard_details"><span class="_lsrT">Ask BNB:</span><span class="_lsrTData _respValue" id="_lsrD_ask">---</span></div>
+								<div class="mpcard_details"><span class="_lsrT">Claimed:</span><span class="_lsrTData _respValue" id="_lsrD_claims">---</span></div>
+								<div class="mpcard_details"><span class="_lsrT">Started:</span><span class="_lsrTData _respValue" id="_lsrD_start">---</span></div>
+								<div class="mpcard_details"><span class="_lsrT">Expires:</span><span class="_lsrTData _respValue" id="_lsrD_expire">---</span><span id="_portBtnConclude" class="portfolioBtn">Conclude</span></div>
+							</div>
+						</div>
+					</div>
+					<div  id="shlcBody" class="actCardBody"><!-- expandable form section -->
+						<!-- place form here -->
+						<div class="shl_header"><!-- create, your delegated total, delegate -->
+							<div class="shl_delegate">
+								<div class="shl_inputshold">
+									<input aria-invalid="false" autocomplete="off" id="delegate_amnt" placeholder="tokens" type="number" pattern="[0-9]*" class="shldi shl_delegate_input" >
+									<button class="shl_max"><span id="shlDmax">MAX</span></button>
+								</div>
+								<button id="delLease" class="shl_delegate_submit"><span>Delegate</span></button>
+								<span id="shlDbal"> bal---</span>
+							</div>
+							<div class="shl_add_separator"></div>
+							<div class="shl_create">
+								<div class="shl_inputshold">
+									<input aria-invalid="false" autocomplete="off" id="create_amnt" placeholder="tokens" type="number" pattern="[0-9]*" class="shldi shl_create_input" >
+									<button class="shl_max"><span id="shlCmax">MAX</span></button>
+								</div>
+								<div class="shl_inputshold">
+									<input aria-invalid="false" autocomplete="off" id="create_ethamnt" placeholder="bnb ask" type="number" pattern="[0-9]*" class="shldi shl_create_input" >
+								</div>
+								<div class="shl_inputshold">
+									<input aria-invalid="false" autocomplete="off" id="create_duration" placeholder="duration" type="number" pattern="[0-9]*" class="shldi shl_days_input" title="days, duration of the lease, whole numbers only, 255 max" >
+								</div>
+								<button id="createLease" class="shl_create_submit"><span>Post Lease</span></button>
+							</div>
+						</div>
+						<div class="createInstr">*only 1 lease can exist at a time</div>
+					</div>
+				</div>
+				<!-- SHARE LEASE -TAKEN -->
+				<div class="actionCard">
+					<div class="actCardTop">
+						<div class="actCardTop_title">Lease Taken <div id="dot_lsrT" class="dot blockel"></div><img src="img/info.png" title="take up leases, find bargains on tokens where the owner is asking x% less the future rewards of the tokens being leased. profit by claiming all rewards as the contract issues them." /></div><!-- expander button -->
+						<div class="actCardTopData"><!-- card infor -->
+						<!-- TAKEN LEASES VIEW -->
+							<div class="inforview">
+								<div class="mpcard_details"><span class="_lsrT">Lessor:</span><span class="_lsrTData _respValue" id="_lsrT_lessor">---</span></div>
+								<div class="mpcard_details"><span class="_lsrT">Tokens:</span><span class="_lsrTData _respValue" id="_lsrT_tokens">---</span></div>
+								<div class="mpcard_details"><span class="_lsrT">Cost bnb:</span><span class="_lsrTData _respValue" id="_lsrT_ask">---</span></div>
+								<div class="mpcard_details"><span class="_lsrT">Claimed:</span><span class="_lsrTData _respValue" id="_lsrT_claims">---</span><span id="_portBtnClaim" class="portfolioBtn">Claim</span></div>
+								<div class="mpcard_details"><span class="_lsrT">Started:</span><span class="_lsrTData _respValue" id="_lsrT_start">---</span></div>
+								<div class="mpcard_details"><span class="_lsrT">Expires:</span><span class="_lsrTData _respValue" id="_lsrT_expiry">---</span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- STAKED TOKENS -->
+				<div class="actionCard"><!-- stake -->
+					<div class="actCardTop">
+						<div class="actCardTop_title">Staked <div id="dot_lsrStk" class="dot blockel"></div>&nbsp;<img src="img/info.png" title="when you buy, your tokens are withheld as tax and they will be reimbursed later. to claim the rewards due to these tokens, stake an amount equal or greater to your reimburse tokens. otherwise your rewards for reimburse tokens are lost forever." /></div><div id="stk_exp" class="actCardTop_expand"></div><!-- expander button -->
+						<div class="actCardTopData"><!-- card infor -->
+							<div class="inforview">
+								<div class="mpcard_details"><span class="_lsrT">Tokens:</span><span class="_lsrTData _respValue" id="_stk_tokens">---</span></div>
+								<div class="mpcard_details"><span class="_lsrT">Duration:</span><span class="_lsrTData _respValue" id="_stk_duration">---</span></div>
+								<div class="mpcard_details"><span class="_lsrT">Claimed:</span><span class="_lsrTData _respValue" id="_stk_claims">---</span><span id="_portBtnClaimSTK" class="portfolioBtn">Claim</span></div>
+								<div class="mpcard_details"><span class="_lsrT">Expires:</span><span class="_lsrTData _respValue" id="_stk_expiry">---</span></div>
+								<div class="mpcard_details"><span class="_lsrT">Claim All:</span><span class="_lsrTData _respValue" id="_stk_rrpass">---</span></div>
+							</div>
+						</div>
+					</div>
+					<div id="stkBody" class="actCardBody"><!-- expandable form section -->
+						<!-- place form here -->
+						<div class="shl_header"><!-- create, your delegated total, delegate -->
+							<div class="shl_delegate">
+								<div class="shl_inputshold">
+									<input aria-invalid="false" autocomplete="off" id="stake_amnt" placeholder="tokens" type="number" pattern="[0-9]*" class="shldi shl_delegate_input" >
+									<button class="shl_max"><span id="stkmax">MAX</span></button>
+								</div>
+								<button id="stake" class="shl_stake_submit"><span>Stake</span></button>
+								<span id="stakedBal"> bal---</span>
+							</div>
+							<div class="shl_add_separator"></div>
+							<div id="shl_unstake" class="shl_create">
+								<div class="shl_inputshold">
+									<input aria-invalid="false" autocomplete="off" id="unstake_amnt" placeholder="tokens" type="number" pattern="[0-9]*" class="shldi shl_create_input" >
+									<button class="shl_max"><span id="unstkmax">MAX</span></button>
+								</div>
+								<button id="unstake" class="shl_stake_submit"><span>unStake</span></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="hypecard_poll" class="actionCard" rbw-include-html="resources/_incl_rbw.html"></div>
+				
+			</div><!-- ACTIONABLE SECTION CLOSE -->
+        </section>
          
         <section class="portfolioSect">
-			<div class="tokenswaps">
-				<div class="port_beneficiary_hold">
-					<div class="port_beneCard">
-						<div class="mpcard_details"><span class="_beneT">my Beneficiary:</span><span class="_beneD _respValue" id="pbCard_bene">---</span></div>
-						<div class="mpcard_details"><span class="_beneT">Payouts Total:</span><span class="_beneD _respValue" id="pbCard_total">---</span></div>
-						<div class="mpcard_details mpcd_last markred"><span class="_beneT">Payouts Value:</span><span class="_beneD _respValue" id="pbCard_value">---</span></div>
-					</div>
-					
-				</div>
-				
-			</div>
+			
 
 			<!-- STATIC CALLS SECTION OF ATM: asv etc -->
 			<div class="unactionablePort">
 				<span class="actionPortLabel">Static View</span>
-				
+				<div class="mybankcard">
+					<div class="mbcard_title"><span class"">LuckyDip</span><span class="mbcard_title"></span>&emsp;<img title="admin can enable lucky dip. it shows the amount you stand to win during your buy tx, paid from the rewards pool directly." src="img/info.png" /></div>
+					<div class="mbcard_detail mbcard_more" style="height:auto;">
+						<span id="mbcard_luckdip" class="mbcard_more_span"> ---- </span>
+						<span id="mbcard_odds" class="mbcard_more_span"> ---- </span>
+						<span id="mbcard_winportion" class="mbcard_more_span"> ---- </span>
+						<span id="mbcard_tokens" class="mbcard_more_span"> ---- </span>
+					</div>
+				</div>
+				<div class="mybankcard">
+					<div class="mbcard_title"><span class"">liquidity Funding</span><span class="mbcard_title"></span>&emsp;<img title="this is a community BUIDL you can invest liquidity capital and get it back with interest. paid directly from fees revenue before any allocations. see the liquidity fund card above to track raised liquidity and the repayment pool size." src="img/info.png" /></div>
+					<div class="mbcard_detail mbcard_more" style="height:auto;">
+						<span id="mbcard_liqFunded" class="mbcard_more_span"> ---- </span>
+						<span id="mbcard_fundingRepaid" class="mbcard_more_span"> ---- </span>
+					</div>
+				</div>
 				<div class="mybankcard">
 					<div class="mbcard_title"><span class"">Token Cost</span><span class="mbcard_title"></span>&emsp;<img title="Average cost per token, in eth." src="img/info.png" /></div>
 					<div class="mbcard_detail mbcard_more">
@@ -282,7 +411,7 @@ document.addEventListener('DOMContentLoaded',function(event){
 					</div>
 				</div>
 				<div class="mybankcard">
-					<div class="mbcard_title"><span class"">tax Reimburse Tokens</span><span class="mbcard_title"></span>&emsp;<img title="your buy tax is reimbursed in full as tokens. if you qualify." src="img/info.png" /></div>
+					<div class="mbcard_title"><span class"">reimburse Due (buy tax to be repaid)</span><span class="mbcard_title"></span>&emsp;<img title="your buy tax is reimbursed in full as tokens. this reimbursedment happens during your sell transaction, seemlessly. if you qualify. to qualify win the temple challenge." src="img/info.png" /></div>
 					<div class="mbcard_detail mbcard_more">
 						<span id="mbcard_reimburseAmnt" class="mbcard_more_span"> ---- </span>
 						<span id="mbcard_reimburseRewards" class="mbcard_more_span"> ---- </span>
@@ -339,6 +468,7 @@ document.addEventListener('DOMContentLoaded',function(event){
 <!-- DRY /MODULAR DEVELOPMENT -->
 <script>
 	includeHypecards();
+	includeRBW();
 </script> 
 
 </body>
